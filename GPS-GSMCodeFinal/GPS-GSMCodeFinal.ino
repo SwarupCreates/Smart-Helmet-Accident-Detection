@@ -51,11 +51,11 @@ void loop() {
     String googleMapsLink = "http://maps.google.com/maps?q=" + lat + "," + lng; // Construct the Google Maps link
     //Serial.println(googleMapsLink); // Print the Google Maps link in the serial monitor
     delay(1000);
-    mySerial.println("ATD9051477045;");
+    mySerial.println("ATDxxxxxxxxxx;"); // Replace xxxxxxxxxx with the phone number you want to send the missed call to
     delay(6000);
     mySerial.println("ATH");
     delay(1000); // Wait for response
-    mySerial.println("AT+CMGS=\"+919051477045\""); // Replace with the phone number you want to send the SMS to
+    mySerial.println("AT+CMGS=\"+91xxxxxxxxxx\""); // Replace xxxxxxxxxx with the phone number you want to send the SMS to | +91 id country code for India
     delay(1000); // Wait for response
     String finalMessage = "I've faced an accident at: "+googleMapsLink+" Need help!";
     mySerial.println(finalMessage); // Replace with your own message
