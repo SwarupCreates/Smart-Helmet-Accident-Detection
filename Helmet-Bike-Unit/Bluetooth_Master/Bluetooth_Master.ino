@@ -16,8 +16,9 @@ const int proximityThreshold = 5;
 //mq3 gas declarations
 #define sensorAnalog A1
 #define sensorDigital 3
-const int alcoholThreshold = 440;
-
+const int alcoholThreshold = 20;
+const int sampleCollectible = 6;
+int initialMean;
 
 void setup() {
 
@@ -29,6 +30,20 @@ void setup() {
   pinMode(echoPin, INPUT);
 
   Serial.begin(9600);
+
+  //To calculate ambient air index
+  int sum = 0;  // Variable to store the sum of the readings
+  int analog;  // Variable to store each reading
+
+  // Take the first sampleCollectible readings and calculate the initial mean
+  bool digital = digitalRead(sensorDigital);
+  for (int i = 0; i < sampleCollectible; i++) {
+    analog = analogRead(sensorAnalog);
+    sum += analog;
+    delay(200);
+  }
+  initialMean = sum / sampleCollectible;
+
 }
 
 void loop() {
@@ -43,11 +58,14 @@ void loop() {
   distanceCm = duration * 0.034 / 2;
 
   bool digital = digitalRead(sensorDigital);
-  int analog = analogRead(sensorAnalog);
-  Serial.println(analog);
+  int sum = 0;  // Variable to store the sum of the readings
+  int analog;  // Variable to store each reading
+  Serial.println(initialMean);
+  analog = analogRead(sensorAnalog);
+  int thresholdModulus  = (analog - initialMean);
 
   //can drive condition
-  if(distanceCm < proximityThreshold && analog <= alcoholThreshold)
+  if(distanceCm < proximityThreshold && thresholdModulus < alcoholThreshold)
   {
     Serial.println("A");
     value = 1;
