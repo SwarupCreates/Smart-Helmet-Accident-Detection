@@ -58,7 +58,7 @@ void loop() {
   distanceCm = duration * 0.034 / 2;
 
   bool digital = digitalRead(sensorDigital);
-  int sum = 0;  // Variable to store the sum of the readings
+  
   int analog;  // Variable to store each reading
   Serial.println(initialMean);
   analog = analogRead(sensorAnalog);
