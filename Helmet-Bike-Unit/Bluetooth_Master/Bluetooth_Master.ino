@@ -1,10 +1,10 @@
 #include <SoftwareSerial.h>
 #include <math.h>
-#include<Wire.h>
+#include <Wire.h>
 
 //master button
-#define button 2
-int value = 0;
+//#define button 2
+//int value = 0;
 
 //ultrasonic declarations
 const int trigPin = 9;
