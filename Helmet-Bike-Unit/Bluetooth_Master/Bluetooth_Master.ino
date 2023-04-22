@@ -71,7 +71,7 @@ void loop() {
     value = 1;
     delay(200);
   }
-  else
+  else if(distanceCm >= proximityThreshold || thresholdModulus >= alcoholThreshold)
   {
     Serial.println("a");
     value = 0;
